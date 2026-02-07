@@ -1,0 +1,346 @@
+:root {
+    --bg-color: #fff9f9;
+    --text-color: #4a3a3a;
+    --primary-rose: #ff8fa3;
+    --secondary-rose: #ffb3c1;
+    --accent-glow: rgba(255, 143, 163, 0.3);
+    --card-bg: rgba(255, 255, 255, 0.8);
+    --tech-border: #ffccd5;
+    --font-main: 'Outfit', sans-serif;
+    --font-mono: 'Inter', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-main);
+    line-height: 1.6;
+    overflow-x: hidden;
+    cursor: none;
+    /* Custom cursor */
+}
+
+/* Custom Cursor Glow */
+#glow-cursor {
+    width: 20px;
+    height: 20px;
+    background: var(--primary-rose);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    filter: blur(8px);
+    transition: transform 0.1s ease;
+    mix-blend-mode: multiply;
+}
+
+#particles-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+main {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    opacity: 0;
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+section.active {
+    opacity: 1;
+}
+
+section.hidden {
+    display: none;
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal.left {
+    transform: translateX(-50px);
+}
+
+.reveal.right {
+    transform: translateX(50px);
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translate(0, 0);
+}
+
+/* Boot Screen */
+#boot-screen {
+    background: #1a1a1a;
+    color: #ff8fa3;
+    font-family: var(--font-mono);
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.terminal-content {
+    font-size: 1.2rem;
+    max-width: 600px;
+    text-align: left;
+}
+
+.cursor {
+    display: inline-block;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+/* Titles */
+.section-title {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    text-align: center;
+    background: linear-gradient(45deg, var(--primary-rose), #ff4d6d);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 600;
+}
+
+/* Timeline */
+.timeline {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.card {
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--tech-border);
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px var(--accent-glow);
+}
+
+.card h3 {
+    color: var(--primary-rose);
+    margin-bottom: 15px;
+}
+
+/* Stats Container Refinement */
+.stats-container {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    width: 100%;
+}
+
+.stats-grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.stats-visual {
+    flex: 0.8;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.radar-scan {
+    width: 200px;
+    height: 200px;
+    border: 2px solid var(--primary-rose);
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+}
+
+.radar-scan::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    background: conic-gradient(from 0deg, var(--primary-rose), transparent);
+    transform-origin: top left;
+    animation: rotate 3s linear infinite;
+    opacity: 0.3;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.scan-label {
+    margin-top: 15px;
+    font-family: var(--font-mono);
+    color: var(--primary-rose);
+    font-size: 0.9rem;
+}
+
+.stat-card {
+    background: #fff;
+    padding: 25px;
+    border-radius: 15px;
+    text-align: center;
+    border-bottom: 4px solid var(--primary-rose);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+}
+
+.stat-icon {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.stat-card h4 {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 5px;
+}
+
+.stat-card p {
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+/* Letter */
+.letter-container {
+    background: #fff;
+    padding: 40px;
+    border-radius: 5px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.05);
+    max-width: 600px;
+    position: relative;
+    border-left: 4px solid var(--secondary-rose);
+}
+
+.typewriter-text {
+    font-size: 1.15rem;
+    line-height: 1.8;
+}
+
+/* Buttons */
+.glow-btn {
+    padding: 15px 40px;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 30px;
+    background: var(--primary-rose);
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px var(--accent-glow);
+    font-family: var(--font-main);
+    font-weight: 500;
+}
+
+.glow-btn:hover {
+    background: #ff4d6d;
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px var(--accent-glow);
+}
+
+/* Proposal Moment */
+.proposal-text {
+    font-size: 2.8rem;
+    text-align: center;
+    margin-bottom: 40px;
+    color: #ff4d6d;
+    animation: floating 3s ease-in-out infinite;
+}
+
+@keyframes floating {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Final Celebration */
+.celebration-content {
+    text-align: center;
+}
+
+.celebration-title {
+    font-size: 3rem;
+    color: #ff4d6d;
+    margin-bottom: 20px;
+}
+
+.signature {
+    margin-top: 30px;
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--primary-rose);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .section-title {
+        font-size: 1.8rem;
+    }
+
+    .proposal-text {
+        font-size: 2rem;
+    }
+
+    .terminal-content {
+        font-size: 1rem;
+    }
+}
